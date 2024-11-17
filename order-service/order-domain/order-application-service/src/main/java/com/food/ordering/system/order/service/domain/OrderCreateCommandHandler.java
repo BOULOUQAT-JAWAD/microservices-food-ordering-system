@@ -54,6 +54,7 @@ public class OrderCreateCommandHandler {
             log.warn("could not find the restaurant with restaurantId : {}", createOrderCommand.getRestaurantId());
             throw new OrderDomainException("could not find the restaurant with restaurantId : "+ createOrderCommand.getRestaurantId());
         }
+        return optionalRestaurant.get();
     }
 
     private void checkCustomer(UUID customerId) {
