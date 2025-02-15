@@ -23,6 +23,8 @@ public class Order extends AggregateRoot<OrderId> {
     private OrderStatus orderStatus;
     private List<String> failureMessages;
 
+    public static final String FAILURE_MESSAGE_DELIMITER = ",";
+
     private Order(Builder builder) {
         super.setId(builder.orderId);
         customerId = builder.customerId;
@@ -102,7 +104,7 @@ public class Order extends AggregateRoot<OrderId> {
         Money orderItemsTotal = items.stream().map(
                 orderItem -> {
                     validateItemPrice(orderItem);
-                    return orderItem.getSubtotal();
+                    return orderItem.getSubTotal();
                 }
         ).reduce(Money.ZERO,Money::add);
 
